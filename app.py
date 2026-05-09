@@ -1,11 +1,21 @@
-# ================================
+# =========================================
 # app.py
-# ================================
+# =========================================
 
 import streamlit as st
 import os
+import sys
 
-# Import all modules
+# =========================================
+# Fix Module Path
+# =========================================
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+# =========================================
+# Import Modules
+# =========================================
+
 from modules.audio_tools import audio_toolkit
 from modules.video_tools import video_toolkit
 from modules.analyzer import media_analyzer
@@ -13,17 +23,17 @@ from modules.frame_processor import frame_processor
 from modules.visualizer import audio_visualizer
 from modules.batch_processing import batch_processing
 
-# ================================
+# =========================================
 # Create Required Folders
-# ================================
+# =========================================
 
 os.makedirs("uploads", exist_ok=True)
 os.makedirs("outputs", exist_ok=True)
 os.makedirs("temp", exist_ok=True)
 
-# ================================
-# Streamlit Page Config
-# ================================
+# =========================================
+# Streamlit Config
+# =========================================
 
 st.set_page_config(
     page_title="Audio + Video Utility Studio",
@@ -31,14 +41,16 @@ st.set_page_config(
     layout="wide"
 )
 
-# ================================
+# =========================================
 # Main Title
-# ================================
+# =========================================
 
 st.title("🎵🎥 Audio + Video Utility Studio")
 
 st.markdown("""
-A Python-based multimedia toolkit for:
+Welcome to the multimedia processing platform built using Python.
+
+### Features
 - Audio Processing
 - Video Editing
 - Media Analysis
@@ -47,14 +59,12 @@ A Python-based multimedia toolkit for:
 - Batch Processing
 """)
 
-# ================================
-# Sidebar Navigation
-# ================================
+# =========================================
+# Sidebar Menu
+# =========================================
 
-st.sidebar.title("📂 Navigation")
-
-menu = st.sidebar.radio(
-    "Choose Module",
+menu = st.sidebar.selectbox(
+    "Select Module",
     [
         "Home",
         "Audio Toolkit",
@@ -66,95 +76,71 @@ menu = st.sidebar.radio(
     ]
 )
 
-# ================================
+# =========================================
 # Home Page
-# ================================
+# =========================================
 
 if menu == "Home":
 
-    st.header("🚀 Welcome")
+    st.header("🚀 Project Overview")
 
     st.write("""
-    This application allows users to process
-    audio and video files directly in the browser.
+    This project combines multiple multimedia utilities
+    into one platform using Python libraries.
 
-    Built using:
+    Technologies Used:
     - Streamlit
     - OpenCV
     - MoviePy
     - Librosa
     - Pydub
-    - NumPy
     """)
 
-    st.subheader("✨ Features")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.success("🎵 Audio Processing")
-        st.success("🎥 Video Editing")
-        st.success("📊 Media Analysis")
-
-    with col2:
-        st.info("🖼 Frame Extraction")
-        st.info("📈 Audio Visualization")
-        st.info("📦 Batch Processing")
-
-    st.subheader("💡 Future Scope")
-
-    st.write("""
-    - AI Subtitle Generator
-    - Video-to-GIF Converter
-    - Cloud Deployment
-    - Mobile App Version
-    """)
-
-# ================================
+# =========================================
 # Audio Toolkit
-# ================================
+# =========================================
 
 elif menu == "Audio Toolkit":
     audio_toolkit()
 
-# ================================
+# =========================================
 # Video Toolkit
-# ================================
+# =========================================
 
 elif menu == "Video Toolkit":
     video_toolkit()
 
-# ================================
+# =========================================
 # Media Analyzer
-# ================================
+# =========================================
 
 elif menu == "Media Analyzer":
     media_analyzer()
 
-# ================================
+# =========================================
 # Frame Processor
-# ================================
+# =========================================
 
 elif menu == "Frame Processor":
     frame_processor()
 
-# ================================
+# =========================================
 # Audio Visualizer
-# ================================
+# =========================================
 
 elif menu == "Audio Visualizer":
     audio_visualizer()
 
-# ================================
+# =========================================
 # Batch Processing
-# ================================
+# =========================================
 
 elif menu == "Batch Processing":
     batch_processing()
 
-# ================================
+# =========================================
 # Footer
-# ================================
+# =========================================
 
 st.sidebar.markdown("---")
-st.sidebar.caption("Built with ❤️ using Python + Streamlit")
+st.sidebar.write("Built with ❤️ using Python + Streamlit")
